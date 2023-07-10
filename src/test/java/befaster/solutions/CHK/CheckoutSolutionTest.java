@@ -79,6 +79,3 @@ class CheckoutSolutionTest {
         assertEquals(-1, sum);
     }
 }
-
-
-
