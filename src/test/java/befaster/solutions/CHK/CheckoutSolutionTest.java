@@ -56,4 +56,11 @@ class CheckoutSolutionTest {
 
         assertEquals(385, sum);
     }
+
+    @Test
+    void shouldIgnoreProductsNotOnTheList() {
+        int sum = checkoutSolution.checkout("AAAAZ|AXXABBBBCDEEFF___99");
+
+        assertEquals(385, sum);
+    }
 }

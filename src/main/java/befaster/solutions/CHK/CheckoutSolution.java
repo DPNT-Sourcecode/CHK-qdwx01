@@ -7,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class CheckoutSolution {
     public static final Map<Character, Integer> INDIVIDUAL_PRICES = new HashMap<>();
+    public static final int SPECIAL_OFFER_A_FOR_3 = 130;
+    public static final int SPECIAL_OFFER_B_FOR_2 = 45;
     static {
         INDIVIDUAL_PRICES.put('A', 50);
         INDIVIDUAL_PRICES.put('B', 30);
@@ -14,8 +16,15 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('D', 15);
     }
 
-    private Integer calculateSpecialOffer(char ) {
-
+    private Integer calculateTotalPrice(char item, Long productCount, Integer individualPrice) {
+        switch (item) {
+            case 'A':
+                return (int) (productCount / 3 * SPECIAL_OFFER_A_FOR_3 + productCount % 3 * individualPrice);
+            case 'B':
+                return (int) (productCount / 2 * SPECIAL_OFFER_B_FOR_2 + productCount % 2 * individualPrice);
+            default:
+                return (int) (productCount * individualPrice);
+        }
     }
 
     public Integer checkout(String skus) {
@@ -32,7 +41,7 @@ public class CheckoutSolution {
                     Integer individualPrice = INDIVIDUAL_PRICES.get(key);
                     int price = 0;
                     if (individualPrice != null) {
-                        price = (int) (productCount.get(key) * individualPrice);
+                        price = calculateTotalPrice(key, productCount.get(key), individualPrice);
                     }
                     return price;
                 })
