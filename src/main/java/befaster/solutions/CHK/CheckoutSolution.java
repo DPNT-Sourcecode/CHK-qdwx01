@@ -98,11 +98,10 @@ public class CheckoutSolution {
         }
 
         if (productCount.get('N') != null && productCount.get('M') != null) {
-            long numberOfFreeMs = productCount.get('E') / 3;
-            long numberOfBs = productCount.get('B');
-            productCountWithoutFreeItems.put('B', Math.max(0, numberOfBs - numberOfFreeMs));
+            long numberOfFreeMs = productCount.get('M') / 3;
+            long numberOfMs = productCount.get('M');
+            productCountWithoutFreeItems.put('M', Math.max(0, numberOfMs - numberOfFreeMs));
         }
-
 
         return productCountWithoutFreeItems;
     }
@@ -144,6 +143,7 @@ public class CheckoutSolution {
             }
         }
 }
+
 
 
 
