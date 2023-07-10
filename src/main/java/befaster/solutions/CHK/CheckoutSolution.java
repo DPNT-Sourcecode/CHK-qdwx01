@@ -10,6 +10,7 @@ public class CheckoutSolution {
     public static final int SPECIAL_OFFER_A_FOR_3 = 130;
     public static final int SPECIAL_OFFER_A_FOR_5 = 200;
     public static final int SPECIAL_OFFER_B_FOR_2 = 45;
+
     static {
         INDIVIDUAL_PRICES.put('A', 50);
         INDIVIDUAL_PRICES.put('B', 30);
@@ -18,7 +19,7 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('E', 40);
     }
 
-    private Integer calculateTotalPrice(char item, Long count, Integer individualPrice, Map<Character, Long> productCount) {
+    private Integer calculateTotalPrice(char item, Long count, Integer individualPrice) {
         switch (item) {
             case 'A':
                 return (int) (count / 5 * SPECIAL_OFFER_A_FOR_5
@@ -26,15 +27,6 @@ public class CheckoutSolution {
                         + (count % 5) % 3 * individualPrice);
             case 'B':
                 return (int) (count / 2 * SPECIAL_OFFER_B_FOR_2 + count % 2 * individualPrice);
-            case 'E':
-                Long numberOfBs = productCount.get('B');
-                long numberOfBsValue = numberOfBs != null ? numberOfBs : 0;
-                long numberOfFreeBs = count / 2;
-                long discount = numberOfBsValue <= numberOfFreeBs
-                        ? calculateTotalPrice('B', numberOfBsValue, INDIVIDUAL_PRICES.get('B'), productCount)
-                        : calculateTotalPrice('B', numberOfFreeBs, INDIVIDUAL_PRICES.get('B'), productCount);
-
-                return (int) (count * individualPrice - discount);
             default:
                 return (int) (count * individualPrice);
         }
@@ -56,6 +48,18 @@ public class CheckoutSolution {
         return isInvalid;
     }
 
+    private Map<Character, Long> applyFreeItemsOffers(Map<Character, Long> productCount) {
+        Map<Character, Long> productCountWithoutFreeItems = new HashMap<>(productCount);
+
+        long numberOfFreeBs = productCount.get('E') != null ? productCount.get('E') / 2 : 0;
+
+        if (productCountWithoutFreeItems.containsKey('B')) {
+            productCountWithoutFreeItems.put('B', productCountWithoutFreeItems.get('B') - numberOfFreeBs);
+        }
+
+        return productCountWithoutFreeItems;
+    }
+
     public Integer checkout(String skus) {
         if (isInvalidSkus(skus)) {
             return -1;
@@ -64,16 +68,19 @@ public class CheckoutSolution {
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        return productCount.keySet().stream()
+        Map<Character, Long> productCountWithoutFreeItems = applyFreeItemsOffers(productCount);
+
+        return productCountWithoutFreeItems.keySet().stream()
                 .mapToInt(key -> {
                     Integer individualPrice = INDIVIDUAL_PRICES.get(key);
                     int price = 0;
                     int mixMatchDiscount = 0;
                     if (individualPrice != null) {
-                        price = calculateTotalPrice(key, productCount.get(key), individualPrice, productCount);
+                        price = calculateTotalPrice(key, productCountWithoutFreeItems.get(key), individualPrice);
                     }
                     return price - mixMatchDiscount;
                 })
                 .sum();
     }
 }
+
