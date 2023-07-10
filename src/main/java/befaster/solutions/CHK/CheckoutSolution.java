@@ -35,6 +35,9 @@ public class CheckoutSolution {
 
         for (char c : skus.toCharArray()) {
             isInvalid = !INDIVIDUAL_PRICES.containsKey(c);
+            if (isInvalid) {
+                break;
+            }
         }
 
         return isInvalid;
@@ -60,6 +63,3 @@ public class CheckoutSolution {
                 .sum();
     }
 }
-
-
-
