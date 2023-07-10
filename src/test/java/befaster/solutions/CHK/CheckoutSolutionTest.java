@@ -23,6 +23,37 @@ class CheckoutSolutionTest {
 
     @Test
     void shouldReturnCorrectSumIfNoOffersApply() {
+        int sum = checkoutSolution.checkout("aabcccd");
 
+        assertEquals(205, sum);
+    }
+
+    @Test
+    void shouldWorkBothWithUpperCaseAndLowerCaseLetters() {
+        int sum = checkoutSolution.checkout("aAbCccD");
+
+        assertEquals(205, sum);
+    }
+
+    @Test
+    void shouldWorkWithSpecialOffersForA() {
+        int sum = checkoutSolution.checkout("AAAABCCCD");
+
+        assertEquals(285, sum);
+    }
+
+
+    @Test
+    void shouldWorkWithSpecialOffersForB() {
+        int sum = checkoutSolution.checkout("AABBBBCD");
+
+        assertEquals(225, sum);
+    }
+
+    @Test
+    void shouldCombineTheOffers() {
+        int sum = checkoutSolution.checkout("AAAAAABBBBCD");
+
+        assertEquals(385, sum);
     }
 }
