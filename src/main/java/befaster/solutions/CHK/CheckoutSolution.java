@@ -14,6 +14,10 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('D', 15);
     }
 
+    private Integer calculateSpecialOffer(char ) {
+
+    }
+
     public Integer checkout(String skus) {
         if (skus == null) {
             return -1;
@@ -23,9 +27,17 @@ public class CheckoutSolution {
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        productCount.keySet().forEach(System.out::println);
-
-        return 0;
+        return productCount.keySet().stream()
+                .mapToInt(key -> {
+                    Integer individualPrice = INDIVIDUAL_PRICES.get(key);
+                    int price = 0;
+                    if (individualPrice != null) {
+                        price = (int) (productCount.get(key) * individualPrice);
+                    }
+                    return price;
+                })
+                .sum();
     }
 }
+
 
