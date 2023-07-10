@@ -54,7 +54,7 @@ public class CheckoutSolution {
                         + count %  SPECIAL_OFFER_A_FOR_5.getNumber() / SPECIAL_OFFER_A_FOR_3.getNumber() * SPECIAL_OFFER_A_FOR_3.getPrice()
                         + (count % SPECIAL_OFFER_A_FOR_5.getNumber()) % SPECIAL_OFFER_A_FOR_3.getNumber() * individualPrice);
             case 'B':
-                return (int) (count / SPECIAL_OFFER_B_FOR_2.getNumber() * SPECIAL_OFFER_B_FOR_2.getPrice() + count % SPECIAL_OFFER_B_FOR_2.getNumber() * individualPrice);
+                return SPECIAL_OFFER_B_FOR_2.calculateOffer(count, individualPrice);
             case 'H':
                 return (int) (count / SPECIAL_OFFER_H_FOR_10.getNumber() * SPECIAL_OFFER_H_FOR_10.getPrice()
                         + count %  SPECIAL_OFFER_H_FOR_10.getNumber() / SPECIAL_OFFER_H_FOR_5.getNumber() * SPECIAL_OFFER_H_FOR_5.getPrice()
@@ -63,6 +63,12 @@ public class CheckoutSolution {
                 return (int) (count / SPECIAL_OFFER_K_FOR_2.getNumber() * SPECIAL_OFFER_K_FOR_2.getPrice() + count % SPECIAL_OFFER_B_FOR_2.getNumber() * individualPrice);
             case 'P':
                 return (int) (count / SPECIAL_OFFER_P_FOR_5.getNumber() * SPECIAL_OFFER_P_FOR_5.getPrice() + count % SPECIAL_OFFER_P_FOR_5.getNumber() * individualPrice);
+            case 'Q':
+                return (int) (count / SPECIAL_OFFER_Q_FOR_3.getNumber() * SPECIAL_OFFER_Q_FOR_3.getPrice() + count % SPECIAL_OFFER_Q_FOR_3.getNumber() * individualPrice);
+            case 'V':
+                return (int) (count / SPECIAL_OFFER_V_FOR_3.getNumber() * SPECIAL_OFFER_V_FOR_3.getPrice()
+                        + count %  SPECIAL_OFFER_V_FOR_3.getNumber() / SPECIAL_OFFER_V_FOR_2.getNumber() * SPECIAL_OFFER_V_FOR_2.getPrice()
+                        + (count % SPECIAL_OFFER_V_FOR_3.getNumber()) % SPECIAL_OFFER_V_FOR_2.getNumber() * individualPrice);
             default:
                 return (int) (count * individualPrice);
         }
@@ -143,5 +149,10 @@ public class CheckoutSolution {
         public int getPrice() {
             return price;
         }
+
+        public int calculateOffer(long count, int individualPrice) {
+            return (int) (count / this.number * this.price + count % this.number * individualPrice);
+        }
     }
 }
+
