@@ -95,9 +95,16 @@ public class CheckoutSolution {
 
     private Map<Character, Long> applyFreeItemsOffers(Map<Character, Long> productCount) {
         Map<Character, Long> productCountWithoutFreeItems = new HashMap<>(productCount);
+        Map<Character, Long> freeItems = new HashMap<>();
 
-        long numberOfBs = productCount.get('B');
-        productCountWithoutFreeItems.put('B', Math.max(0, numberOfBs - getNumberOfFreeItems('E', 'B', 2, productCount)));
+        freeItems.put('B', getNumberOfFreeItems('E', 'B', 2, productCount));
+
+        productCountWithoutFreeItems.keySet()
+                .forEach(key -> {
+                    if (freeItems.containsKey(key)) {
+                        productCountWithoutFreeItems.put(key, productCountWithoutFreeItems.get(key) - freeItems.get(key));
+                    }
+                });
 
         if (productCount.get('F') != null) {
             long numberOfFs = productCount.get('F');
@@ -166,6 +173,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
