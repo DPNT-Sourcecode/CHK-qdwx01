@@ -73,6 +73,13 @@ class CheckoutSolutionTest {
     }
 
     @Test
+    void shouldWorkIfLettersAreMixedTogether() {
+        int sum = checkoutSolution.checkout("ABCDEABCDE");
+        
+        assertEquals(280, sum);
+    }
+
+    @Test
     void shouldWorkWithOffersForEAndB() {
         int sum = checkoutSolution.checkout("AAABBCDEEEE");
 
