@@ -58,7 +58,13 @@ public class CheckoutSolution {
             productCountWithoutFreeItems.put('B', Math.max(0, numberOfBs - numberOfFreeBs));
         }
 
-//        long numberOfFreeFs = productCount.get('F') != null ? productCount.get('F') / 3 : 0;
+        if (productCount.get('F') != null) {
+            long numberOfFs = productCount.get('F');
+            long numberOfFreeFs = productCount.get('F') / 3;
+
+            productCountWithoutFreeItems.put('F', numberOfFs - numberOfFreeFs);
+        }
+
 
         return productCountWithoutFreeItems;
     }
@@ -86,6 +92,7 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
 
 
 
