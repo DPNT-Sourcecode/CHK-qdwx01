@@ -30,10 +30,10 @@ public class CheckoutSolution {
     private boolean isInvalidSkus(String skus) {
         boolean isInvalid = false;
 
-        for (int i = 0; i < ; i++) {
-            
+        for (char c : skus.toCharArray()) {
+            isInvalid = !INDIVIDUAL_PRICES.containsKey(c);
         }
-        
+
         return isInvalid;
     }
 
@@ -57,4 +57,5 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
 
