@@ -18,8 +18,7 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('E', 40);
     }
 
-    private Integer calculateTotalPrice(char item, Map<Character, Long> productCount, Integer individualPrice) {
-        long count = productCount.get(item);
+    private Integer calculateTotalPrice(char item, long count, Integer individualPrice, Map<Character, Long> productCount) {
         switch (item) {
             case 'A':
                 return (int) (count / 5 * SPECIAL_OFFER_A_FOR_5
@@ -31,8 +30,8 @@ public class CheckoutSolution {
                 long numberOfBs = productCount.get('B');
                 long numberOfFreeBs = count / 2;
                 long discount = numberOfBs <= numberOfFreeBs
-                        ? numberOfBs * INDIVIDUAL_PRICES.get('B')
-                        : numberOfFreeBs * INDIVIDUAL_PRICES.get('B');
+                        ? calculateTotalPrice('B', numberOfBs, INDIVIDUAL_PRICES.get('B'), productCount)
+                        : calculateTotalPrice('B', numberOfFreeBs, INDIVIDUAL_PRICES.get('B'), productCount);
 
                 return (int) (count * individualPrice - discount);
             default:
@@ -70,12 +69,13 @@ public class CheckoutSolution {
                     int price = 0;
                     int mixMatchDiscount = 0;
                     if (individualPrice != null) {
-                        price = calculateTotalPrice(key, productCount, individualPrice);
+                        price = calculateTotalPrice(key, productCount.get(key), individualPrice, productCount);
                     }
                     return price - mixMatchDiscount;
                 })
                 .sum();
     }
 }
+
 
 
