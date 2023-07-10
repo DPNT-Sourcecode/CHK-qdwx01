@@ -98,6 +98,10 @@ public class CheckoutSolution {
         Map<Character, Long> freeItems = new HashMap<>();
 
         freeItems.put('B', getNumberOfFreeItems('E', 'B', 2, productCount));
+        freeItems.put('F', getNumberOfFreeItems('F', 'F', 2, productCount));
+        freeItems.put('N', getNumberOfFreeItems('N', 'M', 3, productCount));
+        freeItems.put('R', getNumberOfFreeItems('R', 'Q', 3, productCount));
+        freeItems.put('U', getNumberOfFreeItems('U', 'U', 3, productCount));
 
         productCountWithoutFreeItems.keySet()
                 .forEach(key -> {
@@ -105,32 +109,6 @@ public class CheckoutSolution {
                         productCountWithoutFreeItems.put(key, Math.max(productCountWithoutFreeItems.get(key) - freeItems.get(key), 0));
                     }
                 });
-
-        if (productCount.get('F') != null) {
-            long numberOfFs = productCount.get('F');
-            long numberOfFreeFs = productCount.get('F') / 3;
-
-            productCountWithoutFreeItems.put('F', numberOfFs - numberOfFreeFs);
-        }
-
-        if (productCount.get('N') != null && productCount.get('M') != null) {
-            long numberOfFreeMs = productCount.get('N') / 3;
-            long numberOfMs = productCount.get('M');
-            productCountWithoutFreeItems.put('M', Math.max(0, numberOfMs - numberOfFreeMs));
-        }
-
-        if (productCount.get('R') != null && productCount.get('Q') != null) {
-            long numberOfFreeQs = productCount.get('R') / 3;
-            long numberOfQs = productCount.get('Q');
-            productCountWithoutFreeItems.put('Q', Math.max(0, numberOfQs - numberOfFreeQs));
-        }
-
-        if (productCount.get('U') != null) {
-            long numberOfUs = productCount.get('U');
-            long numberOfFreeUs = productCount.get('U') / 4;
-
-            productCountWithoutFreeItems.put('U', numberOfUs - numberOfFreeUs);
-        }
 
         return productCountWithoutFreeItems;
     }
@@ -173,9 +151,3 @@ public class CheckoutSolution {
         }
     }
 }
-
-
-
-
-
-
