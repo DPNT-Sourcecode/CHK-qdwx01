@@ -26,13 +26,22 @@ public class CheckoutSolution {
                 return (int) (productCount * individualPrice);
         }
     }
+    
+    private boolean isInvalidSkus(String skus) {
+        boolean isInvalid = false;
+
+        for (int i = 0; i < ; i++) {
+            
+        }
+        
+        return isInvalid;
+    }
 
     public Integer checkout(String skus) {
-        if (skus == null) {
+        if (isInvalidSkus(skus)) {
             return -1;
         }
-        String skusUpperCase = skus.toUpperCase();
-        Map<Character, Long> productCount = skusUpperCase.chars()
+        Map<Character, Long> productCount = skus.chars()
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
@@ -48,3 +57,4 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
