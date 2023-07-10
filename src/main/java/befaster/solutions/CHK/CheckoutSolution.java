@@ -81,21 +81,14 @@ public class CheckoutSolution {
         return isInvalid;
     }
 
-    private getNumberOfFreeItems(char item, Map<Character, Long> productCount) {
-        switch (item) {
-            case 'E':
-                if (productCount.get('B') != null) {
-
-                }
-                break;
-            case 'E':
-                break;
-            case 'E':
-                break;
-            case 'E':
-                break;
-            case 'E':
-                break;
+    private long getNumberOfFreeItems(char item, char freeItem, int number, Map<Character, Long> productCount) {
+        if (productCount.get(item) == null || productCount.get(freeItem) == null) {
+            return 0;
+        }
+        if (item == freeItem) {
+            return productCount.get(freeItem) / (number + 1);
+        } else {
+            return productCount.get(freeItem) / number;
         }
     }
 
@@ -103,11 +96,8 @@ public class CheckoutSolution {
     private Map<Character, Long> applyFreeItemsOffers(Map<Character, Long> productCount) {
         Map<Character, Long> productCountWithoutFreeItems = new HashMap<>(productCount);
 
-        if (productCount.get('B') != null && productCount.get('E') != null) {
-            long numberOfFreeBs = productCount.get('E') / 2;
-            long numberOfBs = productCount.get('B');
-            productCountWithoutFreeItems.put('B', Math.max(0, numberOfBs - numberOfFreeBs));
-        }
+        long numberOfBs = productCount.get('B');
+        productCountWithoutFreeItems.put('B', Math.max(0, numberOfBs - getNumberOfFreeItems('E', 'B', 2, productCount)));
 
         if (productCount.get('F') != null) {
             long numberOfFs = productCount.get('F');
@@ -176,6 +166,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
