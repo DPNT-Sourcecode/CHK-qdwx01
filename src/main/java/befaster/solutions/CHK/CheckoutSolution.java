@@ -8,12 +8,14 @@ import java.util.stream.Collectors;
 public class CheckoutSolution {
     public static final Map<Character, Integer> INDIVIDUAL_PRICES = new HashMap<>();
     public static final int SPECIAL_OFFER_A_FOR_3 = 130;
+    public 
     public static final int SPECIAL_OFFER_B_FOR_2 = 45;
     static {
         INDIVIDUAL_PRICES.put('A', 50);
         INDIVIDUAL_PRICES.put('B', 30);
         INDIVIDUAL_PRICES.put('C', 20);
         INDIVIDUAL_PRICES.put('D', 15);
+        INDIVIDUAL_PRICES.put('E', 40);
     }
 
     private Integer calculateTotalPrice(char item, Long productCount, Integer individualPrice) {
@@ -63,3 +65,4 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
