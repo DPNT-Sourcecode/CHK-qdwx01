@@ -1,9 +1,21 @@
 package befaster.solutions.CHK;
 
-import befaster.runner.SolutionNotImplementedException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CheckoutSolution {
+    public static final Map<Character, Integer> INDIVIDUAL_PRICES = new HashMap<>();
+    static {
+        INDIVIDUAL_PRICES.put('A', 50);
+        INDIVIDUAL_PRICES.put('B', 30);
+        INDIVIDUAL_PRICES.put('C', 20);
+        INDIVIDUAL_PRICES.put('D', 15);
+    }
+
     public Integer checkout(String skus) {
-        throw new SolutionNotImplementedException();
+        if (skus == null) {
+            return -1;
+        }
+        return 0;
     }
 }
