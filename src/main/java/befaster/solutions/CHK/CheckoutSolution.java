@@ -18,16 +18,25 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('E', 40);
     }
 
-    private Integer calculateTotalPrice(char item, Long productCount, Integer individualPrice) {
+    private Integer calculateTotalPrice(char item, Map<Character, Long> productCount, Integer individualPrice) {
+        long count = productCount.get(item);
         switch (item) {
             case 'A':
-                return (int) (productCount / 5 * SPECIAL_OFFER_A_FOR_5
-                        + productCount % 5 / 3 * SPECIAL_OFFER_A_FOR_3
-                        + (productCount % 5) % 3 * individualPrice);
+                return (int) (count / 5 * SPECIAL_OFFER_A_FOR_5
+                        + count % 5 / 3 * SPECIAL_OFFER_A_FOR_3
+                        + (count % 5) % 3 * individualPrice);
             case 'B':
-                return (int) (productCount / 2 * SPECIAL_OFFER_B_FOR_2 + productCount % 2 * individualPrice);
+                return (int) (count / 2 * SPECIAL_OFFER_B_FOR_2 + count % 2 * individualPrice);
+            case 'E':
+                long numberOfBs = productCount.get('B');
+                long numberOfFreeBs = count % 2;
+                long discount = numberOfBs <= numberOfFreeBs
+                        ? numberOfBs * INDIVIDUAL_PRICES.get('B')
+                        : numberOfFreeBs * INDIVIDUAL_PRICES.get('B');
+
+                return (int) (count * individualPrice - discount);
             default:
-                return (int) (productCount * individualPrice);
+                return (int) (count * individualPrice);
         }
     }
 
@@ -59,11 +68,13 @@ public class CheckoutSolution {
                 .mapToInt(key -> {
                     Integer individualPrice = INDIVIDUAL_PRICES.get(key);
                     int price = 0;
+                    int mixMatchDiscount = 0;
                     if (individualPrice != null) {
-                        price = calculateTotalPrice(key, productCount.get(key), individualPrice);
+                        price = calculateTotalPrice(key, productCount, individualPrice);
                     }
-                    return price;
+                    return price - mixMatchDiscount;
                 })
                 .sum();
     }
 }
+
