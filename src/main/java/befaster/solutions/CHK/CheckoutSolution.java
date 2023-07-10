@@ -14,7 +14,6 @@ public class CheckoutSolution {
     public static final Offer SPECIAL_OFFER_P = new Offer(5, 200);
     public static final Offer SPECIAL_OFFER_Q = new Offer(3, 80);
     public static final DoubleOffer SPECIAL_OFFER_V = new DoubleOffer(3, 130, 2, 90);
-    public static final GetOneFreeOffer SPECIAL_OFFER_E = new GetOneFreeOffer(2, 'B');
 
     static {
         INDIVIDUAL_PRICES.put('A', 50);
@@ -107,8 +106,6 @@ public class CheckoutSolution {
         return productCountWithoutFreeItems;
     }
 
-    private Map<Character, Long> getFreeItems(Map)
-
     public Integer checkout(String skus) {
         if (isInvalidSkus(skus)) {
             return -1;
@@ -134,20 +131,16 @@ public class CheckoutSolution {
 
     private record Offer(int number, int price) {
         public int calculateOffer(long count, int individualPrice) {
-                return (int) (count / this.number * this.price + count % this.number * individualPrice);
-            }
+            return (int) (count / this.number * this.price + count % this.number * individualPrice);
         }
+    }
 
     private record DoubleOffer(int largeNumber, int largePrice, int smallNumber, int smallPrice) {
         public int calculateOffer(long count, int individualPrice) {
-                return (int) (count / largeNumber * largePrice
-                        + count % largeNumber / smallNumber * smallPrice
-                        + (count % largeNumber) % smallNumber * individualPrice);
-            }
-        }
-
-    private static class GetOneFreeOffer {
-        public GetOneFreeOffer(int i, char b) {
+            return (int) (count / largeNumber * largePrice
+                    + count % largeNumber / smallNumber * smallPrice
+                    + (count % largeNumber) % smallNumber * individualPrice);
         }
     }
 }
+
