@@ -32,7 +32,7 @@ public class CheckoutSolution {
                 long numberOfFreeBs = count / 2;
                 long discount = numberOfBsValue <= numberOfFreeBs
                         ? calculateTotalPrice('B', numberOfBsValue, INDIVIDUAL_PRICES.get('B'), productCount)
-                        : calculateTotalPrice('B', numberOfBsValue, INDIVIDUAL_PRICES.get('B'), productCount) - calculateTotalPrice('B', numberOfFreeBs, INDIVIDUAL_PRICES.get('B'), productCount);
+                        : calculateTotalPrice('B', numberOfFreeBs, INDIVIDUAL_PRICES.get('B'), productCount);
 
                 return (int) (count * individualPrice - discount);
             default:
@@ -77,5 +77,6 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
 
 

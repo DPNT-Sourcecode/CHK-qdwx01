@@ -15,6 +15,13 @@ class CheckoutSolutionTest {
     }
 
     @Test
+    void shouldWorkForAllLetters() {
+        int sum = checkoutSolution.checkout("ABCDE");
+
+        assertEquals(155, sum);
+    }
+
+    @Test
     void shouldWorkForEmptyString() {
         int sum = checkoutSolution.checkout("");
 
@@ -93,4 +100,5 @@ class CheckoutSolutionTest {
         assertEquals(-1, sum);
     }
 }
+
 
