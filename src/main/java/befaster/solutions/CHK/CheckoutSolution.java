@@ -18,7 +18,10 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('E', 40);
     }
 
-    private Integer calculateTotalPrice(char item, long count, Integer individualPrice, Map<Character, Long> productCount) {
+    private Integer calculateTotalPrice(char item, Long count, Integer individualPrice, Map<Character, Long> productCount) {
+        if (count == null || individualPrice == null || productCount == null) {
+            return 0;
+        }
         switch (item) {
             case 'A':
                 return (int) (count / 5 * SPECIAL_OFFER_A_FOR_5
@@ -76,3 +79,4 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
