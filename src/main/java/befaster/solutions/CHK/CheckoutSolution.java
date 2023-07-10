@@ -88,7 +88,7 @@ public class CheckoutSolution {
         if (item == freeItem) {
             return productCount.get(freeItem) / (number + 1);
         } else {
-            return productCount.get(freeItem) / number;
+            return productCount.get(item) / number;
         }
     }
 
@@ -102,7 +102,7 @@ public class CheckoutSolution {
         productCountWithoutFreeItems.keySet()
                 .forEach(key -> {
                     if (freeItems.containsKey(key)) {
-                        productCountWithoutFreeItems.put(key, productCountWithoutFreeItems.get(key) - freeItems.get(key));
+                        productCountWithoutFreeItems.put(key, Math.max(productCountWithoutFreeItems.get(key) - freeItems.get(key), 0));
                     }
                 });
 
@@ -173,6 +173,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
