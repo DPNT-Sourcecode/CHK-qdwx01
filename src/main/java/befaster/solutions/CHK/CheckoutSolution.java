@@ -19,9 +19,6 @@ public class CheckoutSolution {
     }
 
     private Integer calculateTotalPrice(char item, Long count, Integer individualPrice, Map<Character, Long> productCount) {
-        if (count == null || individualPrice == null || productCount == null) {
-            return 0;
-        }
         switch (item) {
             case 'A':
                 return (int) (count / 5 * SPECIAL_OFFER_A_FOR_5
@@ -30,7 +27,7 @@ public class CheckoutSolution {
             case 'B':
                 return (int) (count / 2 * SPECIAL_OFFER_B_FOR_2 + count % 2 * individualPrice);
             case 'E':
-                long numberOfBs = productCount.get('B');
+                long numberOfBs = productCount != null ? productCount.get('B') : 0;
                 long numberOfFreeBs = count / 2;
                 long discount = numberOfBs <= numberOfFreeBs
                         ? calculateTotalPrice('B', numberOfBs, INDIVIDUAL_PRICES.get('B'), productCount)
@@ -79,4 +76,5 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
 
