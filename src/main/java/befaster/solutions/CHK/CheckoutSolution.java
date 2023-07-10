@@ -18,7 +18,10 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('E', 40);
     }
 
-    private Integer calculateTotalPrice(char item, Long count, Integer individualPrice, Long numberOfBs) {
+    private Integer calculateTotalPrice(char item, Long count, Integer individualPrice, Map<Character, Long> productCount) {
+        if (count == null || individualPrice == null || productCount == null) {
+            return 0;
+        }
         switch (item) {
             case 'A':
                 return (int) (count / 5 * SPECIAL_OFFER_A_FOR_5
@@ -27,10 +30,11 @@ public class CheckoutSolution {
             case 'B':
                 return (int) (count / 2 * SPECIAL_OFFER_B_FOR_2 + count % 2 * individualPrice);
             case 'E':
+                long numberOfBs = productCount.get('B');
                 long numberOfFreeBs = count / 2;
                 long discount = numberOfBs <= numberOfFreeBs
-                        ? calculateTotalPrice('B', numberOfBs, INDIVIDUAL_PRICES.get('B'), numberOfBs)
-                        : calculateTotalPrice('B', numberOfFreeBs, INDIVIDUAL_PRICES.get('B'), numberOfFreeBs);
+                        ? calculateTotalPrice('B', numberOfBs, INDIVIDUAL_PRICES.get('B'), productCount)
+                        : calculateTotalPrice('B', numberOfFreeBs, INDIVIDUAL_PRICES.get('B'), productCount);
 
                 return (int) (count * individualPrice - discount);
             default:
@@ -62,21 +66,20 @@ public class CheckoutSolution {
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        Long numberOfBs = productCount.get('B');
-
         return productCount.keySet().stream()
                 .mapToInt(key -> {
                     Integer individualPrice = INDIVIDUAL_PRICES.get(key);
                     int price = 0;
                     int mixMatchDiscount = 0;
                     if (individualPrice != null) {
-                        price = calculateTotalPrice(key, productCount.get(key), individualPrice, numberOfBs);
+                        price = calculateTotalPrice(key, productCount.get(key), individualPrice, productCount);
                     }
                     return price - mixMatchDiscount;
                 })
                 .sum();
     }
 }
+
 
 
 
