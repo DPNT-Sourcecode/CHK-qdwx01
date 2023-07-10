@@ -99,4 +99,11 @@ class CheckoutSolutionTest {
 
         assertEquals(-1, sum);
     }
+
+    @Test
+    void shouldWorkWithFs() {
+        int sum = checkoutSolution.checkout("FFABCDECBAABCABBAAAEEAAFF");
+
+        assertEquals(695, sum);
+    }
 }
