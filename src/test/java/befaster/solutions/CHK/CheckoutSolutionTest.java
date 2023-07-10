@@ -53,7 +53,7 @@ class CheckoutSolutionTest {
 
     @Test
     void shouldReturnMinus1IfIncludesProductNotOnTheList() {
-        int sum = checkoutSolution.checkout("AAAAZ|AXXA");
+        int sum = checkoutSolution.checkout("AxA");
 
         assertEquals(-1, sum);
     }
