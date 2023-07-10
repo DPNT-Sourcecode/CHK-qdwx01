@@ -27,11 +27,11 @@ public class CheckoutSolution {
             case 'B':
                 return (int) (count / 2 * SPECIAL_OFFER_B_FOR_2 + count % 2 * individualPrice);
             case 'E':
-                Long numberOfBs = productCount.get('B');
-                int numberOfFreeBs = (int) count / 2;
-                Long discount = numberOfBs <= numberOfFreeBs
-                        ? (long) calculateTotalPrice('B', numberOfBs, INDIVIDUAL_PRICES.get('B'), productCount)
-                        : (long) calculateTotalPrice('B', numberOfFreeBs, INDIVIDUAL_PRICES.get('B'), productCount);
+                long numberOfBs = productCount.get('B');
+                long numberOfFreeBs = count / 2;
+                long discount = numberOfBs <= numberOfFreeBs
+                        ? calculateTotalPrice('B', numberOfBs, INDIVIDUAL_PRICES.get('B'), productCount)
+                        : calculateTotalPrice('B', numberOfFreeBs, INDIVIDUAL_PRICES.get('B'), productCount);
 
                 return (int) (count * individualPrice - discount);
             default:
@@ -76,11 +76,3 @@ public class CheckoutSolution {
                 .sum();
     }
 }
-
-
-
-
-
-
-
-
