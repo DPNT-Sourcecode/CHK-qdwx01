@@ -99,8 +99,8 @@ public class CheckoutSolution {
 
         freeItems.put('B', getNumberOfFreeItems('E', 'B', 2, productCount));
         freeItems.put('F', getNumberOfFreeItems('F', 'F', 2, productCount));
-        freeItems.put('N', getNumberOfFreeItems('N', 'M', 3, productCount));
-        freeItems.put('R', getNumberOfFreeItems('R', 'Q', 3, productCount));
+        freeItems.put('M', getNumberOfFreeItems('N', 'M', 3, productCount));
+        freeItems.put('Q', getNumberOfFreeItems('R', 'Q', 3, productCount));
         freeItems.put('U', getNumberOfFreeItems('U', 'U', 3, productCount));
 
         productCountWithoutFreeItems.keySet()
@@ -151,3 +151,4 @@ public class CheckoutSolution {
         }
     }
 }
+
