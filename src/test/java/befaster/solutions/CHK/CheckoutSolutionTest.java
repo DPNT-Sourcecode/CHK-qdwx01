@@ -45,10 +45,24 @@ class CheckoutSolutionTest {
     }
 
     @Test
-    void shouldCombineTheOffers() {
+    void shouldCombineTheOffersFor3AAnd2B() {
         int sum = checkoutSolution.checkout("AAAAAABBBBCD");
 
         assertEquals(385, sum);
+    }
+
+    @Test
+    void shouldCombineOffersForAs() {
+        int sum = checkoutSolution.checkout("AAAAAAAAAAAAAAAAAAA");
+
+        assertEquals(780, sum);
+    }
+
+    @Test
+    void shouldWorkWithOffersForE() {
+        int sum = checkoutSolution.checkout("AABBBBCDEE");
+
+        assertEquals(780, sum);
     }
 
     @Test
@@ -58,3 +72,4 @@ class CheckoutSolutionTest {
         assertEquals(-1, sum);
     }
 }
+

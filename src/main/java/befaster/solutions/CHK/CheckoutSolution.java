@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 public class CheckoutSolution {
     public static final Map<Character, Integer> INDIVIDUAL_PRICES = new HashMap<>();
     public static final int SPECIAL_OFFER_A_FOR_3 = 130;
-    public 
+    public static final int SPECIAL_OFFER_A_FOR_5 = 200;
     public static final int SPECIAL_OFFER_B_FOR_2 = 45;
     static {
         INDIVIDUAL_PRICES.put('A', 50);
@@ -28,7 +28,7 @@ public class CheckoutSolution {
                 return (int) (productCount * individualPrice);
         }
     }
-    
+
     private boolean isInvalidSkus(String skus) {
         if (skus == null) {
             return true;
@@ -65,4 +65,5 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
 
