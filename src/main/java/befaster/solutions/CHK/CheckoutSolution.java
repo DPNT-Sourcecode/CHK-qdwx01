@@ -62,7 +62,7 @@ public class CheckoutSolution {
             case 'K':
                 return (int) (count / SPECIAL_OFFER_K_FOR_2.getNumber() * SPECIAL_OFFER_K_FOR_2.getPrice() + count % SPECIAL_OFFER_B_FOR_2.getNumber() * individualPrice);
             case 'P':
-                return (int) (count / SPECIAL_OFFER_B_FOR_2.getNumber() * SPECIAL_OFFER_B_FOR_2.getPrice() + count % SPECIAL_OFFER_B_FOR_2.getNumber() * individualPrice);
+                return (int) (count / SPECIAL_OFFER_P_FOR_5.getNumber() * SPECIAL_OFFER_P_FOR_5.getPrice() + count % SPECIAL_OFFER_P_FOR_5.getNumber() * individualPrice);
             default:
                 return (int) (count * individualPrice);
         }
@@ -145,7 +145,3 @@ public class CheckoutSolution {
         }
     }
 }
-
-
-
-
