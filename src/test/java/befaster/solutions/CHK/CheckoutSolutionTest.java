@@ -66,6 +66,13 @@ class CheckoutSolutionTest {
     }
 
     @Test
+    void shouldWorkIfThereAreNoBs() {
+        int sum = checkoutSolution.checkout("EE");
+
+        assertEquals(80, sum);
+    }
+
+    @Test
     void shouldWorkWithOffersForEAndB() {
         int sum = checkoutSolution.checkout("AAABBCDEEEE");
 
