@@ -81,6 +81,25 @@ public class CheckoutSolution {
         return isInvalid;
     }
 
+    private getNumberOfFreeItems(char item, Map<Character, Long> productCount) {
+        switch (item) {
+            case 'E':
+                if (productCount.get('B') != null) {
+
+                }
+                break;
+            case 'E':
+                break;
+            case 'E':
+                break;
+            case 'E':
+                break;
+            case 'E':
+                break;
+        }
+    }
+
+
     private Map<Character, Long> applyFreeItemsOffers(Map<Character, Long> productCount) {
         Map<Character, Long> productCountWithoutFreeItems = new HashMap<>(productCount);
 
@@ -111,13 +130,14 @@ public class CheckoutSolution {
 
         if (productCount.get('U') != null) {
             long numberOfUs = productCount.get('U');
-            long numberOfFreeUs = productCount.get('U') / 3;
+            long numberOfFreeUs = productCount.get('U') / 4;
 
             productCountWithoutFreeItems.put('U', numberOfUs - numberOfFreeUs);
         }
 
         return productCountWithoutFreeItems;
     }
+
 
     public Integer checkout(String skus) {
         if (isInvalidSkus(skus)) {
@@ -156,5 +176,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
