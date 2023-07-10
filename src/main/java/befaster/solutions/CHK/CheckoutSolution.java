@@ -9,12 +9,12 @@ public class CheckoutSolution {
     public static final Map<Character, Integer> INDIVIDUAL_PRICES = new HashMap<>();
     public static final Offer SPECIAL_OFFER_A_FOR_3 = new Offer(3, 130);
     public static final Offer SPECIAL_OFFER_A_FOR_5 = new Offer(5, 200);
-    public static final Offer SPECIAL_OFFER_B_FOR_2 = new Offer(2, 45);
+    public static final Offer SPECIAL_OFFER_B = new Offer(2, 45);
     public static final Offer SPECIAL_OFFER_H_FOR_5 = new Offer(5, 45);
     public static final Offer SPECIAL_OFFER_H_FOR_10 = new Offer(10, 80);
-    public static final Offer SPECIAL_OFFER_K_FOR_2 = new Offer(2, 150);
-    public static final Offer SPECIAL_OFFER_P_FOR_5 = new Offer(5, 200);
-    public static final Offer SPECIAL_OFFER_Q_FOR_3 = new Offer(3, 80);
+    public static final Offer SPECIAL_OFFER_K = new Offer(2, 150);
+    public static final Offer SPECIAL_OFFER_P = new Offer(5, 200);
+    public static final Offer SPECIAL_OFFER_Q = new Offer(3, 80);
     public static final Offer SPECIAL_OFFER_V_FOR_2 = new Offer(2, 90);
     public static final Offer SPECIAL_OFFER_V_FOR_3 = new Offer(3, 130);
 
@@ -54,17 +54,17 @@ public class CheckoutSolution {
                         + count %  SPECIAL_OFFER_A_FOR_5.getNumber() / SPECIAL_OFFER_A_FOR_3.getNumber() * SPECIAL_OFFER_A_FOR_3.getPrice()
                         + (count % SPECIAL_OFFER_A_FOR_5.getNumber()) % SPECIAL_OFFER_A_FOR_3.getNumber() * individualPrice);
             case 'B':
-                return SPECIAL_OFFER_B_FOR_2.calculateOffer(count, individualPrice);
+                return SPECIAL_OFFER_B.calculateOffer(count, individualPrice);
             case 'H':
                 return (int) (count / SPECIAL_OFFER_H_FOR_10.getNumber() * SPECIAL_OFFER_H_FOR_10.getPrice()
                         + count %  SPECIAL_OFFER_H_FOR_10.getNumber() / SPECIAL_OFFER_H_FOR_5.getNumber() * SPECIAL_OFFER_H_FOR_5.getPrice()
                         + (count % SPECIAL_OFFER_H_FOR_10.getNumber()) % SPECIAL_OFFER_H_FOR_5.getNumber() * individualPrice);
             case 'K':
-                return (int) (count / SPECIAL_OFFER_K_FOR_2.getNumber() * SPECIAL_OFFER_K_FOR_2.getPrice() + count % SPECIAL_OFFER_B_FOR_2.getNumber() * individualPrice);
+                return SPECIAL_OFFER_K.calculateOffer(count, individualPrice);
             case 'P':
-                return (int) (count / SPECIAL_OFFER_P_FOR_5.getNumber() * SPECIAL_OFFER_P_FOR_5.getPrice() + count % SPECIAL_OFFER_P_FOR_5.getNumber() * individualPrice);
+                return SPECIAL_OFFER_P.calculateOffer(count, individualPrice);
             case 'Q':
-                return (int) (count / SPECIAL_OFFER_Q_FOR_3.getNumber() * SPECIAL_OFFER_Q_FOR_3.getPrice() + count % SPECIAL_OFFER_Q_FOR_3.getNumber() * individualPrice);
+                return SPECIAL_OFFER_Q.calculateOffer(count, individualPrice);
             case 'V':
                 return (int) (count / SPECIAL_OFFER_V_FOR_3.getNumber() * SPECIAL_OFFER_V_FOR_3.getPrice()
                         + count %  SPECIAL_OFFER_V_FOR_3.getNumber() / SPECIAL_OFFER_V_FOR_2.getNumber() * SPECIAL_OFFER_V_FOR_2.getPrice()
@@ -155,4 +155,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
