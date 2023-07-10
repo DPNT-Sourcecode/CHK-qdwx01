@@ -103,6 +103,19 @@ public class CheckoutSolution {
             productCountWithoutFreeItems.put('M', Math.max(0, numberOfMs - numberOfFreeMs));
         }
 
+        if (productCount.get('R') != null && productCount.get('Q') != null) {
+            long numberOfFreeQs = productCount.get('R') / 3;
+            long numberOfQs = productCount.get('Q');
+            productCountWithoutFreeItems.put('Q', Math.max(0, numberOfQs - numberOfFreeQs));
+        }
+
+        if (productCount.get('U') != null) {
+            long numberOfUs = productCount.get('U');
+            long numberOfFreeUs = productCount.get('U') / 3;
+
+            productCountWithoutFreeItems.put('U', numberOfUs - numberOfFreeUs);
+        }
+
         return productCountWithoutFreeItems;
     }
 
@@ -143,4 +156,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
