@@ -27,7 +27,7 @@ public class CheckoutSolution {
             case 'B':
                 return (int) (count / 2 * SPECIAL_OFFER_B_FOR_2 + count % 2 * individualPrice);
             case 'E':
-                long numberOfBs = productCount.get('B');
+                long numberOfBs = productCount.get(Character.valueOf('B'));
                 long numberOfFreeBs = count / 2;
                 long discount = numberOfBs <= numberOfFreeBs
                         ? calculateTotalPrice('B', numberOfBs, INDIVIDUAL_PRICES.get('B'), productCount)
@@ -76,3 +76,4 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
