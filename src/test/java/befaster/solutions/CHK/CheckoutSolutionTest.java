@@ -75,7 +75,7 @@ class CheckoutSolutionTest {
     @Test
     void shouldWorkIfLettersAreMixedTogether() {
         int sum = checkoutSolution.checkout("ABCDEABCDE");
-        
+
         assertEquals(280, sum);
     }
 
@@ -93,3 +93,4 @@ class CheckoutSolutionTest {
         assertEquals(-1, sum);
     }
 }
+
