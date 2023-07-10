@@ -28,6 +28,9 @@ public class CheckoutSolution {
     }
     
     private boolean isInvalidSkus(String skus) {
+        if (skus == null) {
+            return true;
+        }
         boolean isInvalid = false;
 
         for (char c : skus.toCharArray()) {
@@ -57,5 +60,6 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
 
 
