@@ -21,7 +21,9 @@ public class CheckoutSolution {
     private Integer calculateTotalPrice(char item, Long productCount, Integer individualPrice) {
         switch (item) {
             case 'A':
-                return (int) (productCount / 3 * SPECIAL_OFFER_A_FOR_3 + productCount % 3 * individualPrice);
+                return (int) (productCount / 5 * SPECIAL_OFFER_A_FOR_5
+                        + productCount % 5 / 3 * SPECIAL_OFFER_A_FOR_3
+                        + (productCount % 5) % 3 * individualPrice);
             case 'B':
                 return (int) (productCount / 2 * SPECIAL_OFFER_B_FOR_2 + productCount % 2 * individualPrice);
             default:
@@ -65,5 +67,6 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
 
 
