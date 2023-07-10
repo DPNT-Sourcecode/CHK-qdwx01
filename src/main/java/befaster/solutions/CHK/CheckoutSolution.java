@@ -52,9 +52,10 @@ public class CheckoutSolution {
         Map<Character, Long> productCountWithoutFreeItems = new HashMap<>(productCount);
 
         long numberOfFreeBs = productCount.get('E') != null ? productCount.get('E') / 2 : 0;
+        long numberOfBs = productCount.get('B') != null ? productCount.get('B') : 0;
 
         if (productCountWithoutFreeItems.containsKey('B')) {
-            productCountWithoutFreeItems.put('B', productCountWithoutFreeItems.get('B') - numberOfFreeBs);
+            productCountWithoutFreeItems.put('B', Math.max(0, numberOfBs - numberOfFreeBs));
         }
 
         return productCountWithoutFreeItems;
@@ -83,4 +84,5 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
 
