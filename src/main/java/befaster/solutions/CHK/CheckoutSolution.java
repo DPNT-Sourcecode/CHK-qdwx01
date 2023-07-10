@@ -7,16 +7,16 @@ import java.util.stream.Collectors;
 
 public class CheckoutSolution {
     public static final Map<Character, Integer> INDIVIDUAL_PRICES = new HashMap<>();
-    public static final Pair<Integer, Integer> SPECIAL_OFFER_A_FOR_3 = new Pair(3, 130);
-    public static final int SPECIAL_OFFER_A_FOR_5 = 200;
-    public static final int SPECIAL_OFFER_B_FOR_2 = 45;
-    public static final int SPECIAL_OFFER_H_FOR_5 = 45;
-    public static final int SPECIAL_OFFER_H_FOR_10 = 80;
-    public static final int SPECIAL_OFFER_K_FOR_2 = 150;
-    public static final int SPECIAL_OFFER_P_FOR_5 = 200;
-    public static final int SPECIAL_OFFER_Q_FOR_3 = 80;
-    public static final int SPECIAL_OFFER_V_FOR_2 = 90;
-    public static final int SPECIAL_OFFER_V_FOR_3 = 130;
+    public static final Offer SPECIAL_OFFER_A_FOR_3 = new Offer(3, 130);
+    public static final Offer SPECIAL_OFFER_A_FOR_5 = new Offer(5, 200);
+    public static final Offer SPECIAL_OFFER_B_FOR_2 = new Offer(2, 45);
+    public static final Offer SPECIAL_OFFER_H_FOR_5 = new Offer(5, 45);
+    public static final Offer SPECIAL_OFFER_H_FOR_10 = new Offer(10, 80);
+    public static final Offer SPECIAL_OFFER_K_FOR_2 = new Offer(2, 150);
+    public static final Offer SPECIAL_OFFER_P_FOR_5 = new Offer(5, 200);
+    public static final Offer SPECIAL_OFFER_Q_FOR_3 = new Offer(3, 80);
+    public static final Offer SPECIAL_OFFER_V_FOR_2 = new Offer(2, 90);
+    public static final Offer SPECIAL_OFFER_V_FOR_3 = new Offer(3, 130);
 
     static {
         INDIVIDUAL_PRICES.put('A', 50);
@@ -50,11 +50,12 @@ public class CheckoutSolution {
     private Integer calculateTotalPrice(char item, Long count, Integer individualPrice) {
         switch (item) {
             case 'A':
-                return (int) (count / 5 * SPECIAL_OFFER_A_FOR_5
-                        + count % 5 / 3 * SPECIAL_OFFER_A_FOR_3
+                return (int) (count / SPECIAL_OFFER_A_FOR_5.getNumber() * SPECIAL_OFFER_A_FOR_5.getPrice()
+                        + count %  SPECIAL_OFFER_A_FOR_5.getNumber() / SPECIAL_OFFER_A_FOR_3.getNumber() * SPECIAL_OFFER_A_FOR_3.getPrice()
                         + (count % 5) % 3 * individualPrice);
             case 'B':
-                return (int) (count / 2 * SPECIAL_OFFER_B_FOR_2 + count % 2 * individualPrice);
+                return (int) (count / SPECIAL_OFFER_B_FOR_2.getNumber() * SPECIAL_OFFER_B_FOR_2.getPrice() + count % 2 * individualPrice);
+            case 'H':
             default:
                 return (int) (count * individualPrice);
         }
@@ -118,6 +119,25 @@ public class CheckoutSolution {
                 })
                 .sum();
     }
+
+    private static class Offer {
+        private final int number;
+        private final int price;
+
+        public Offer(int number, int price) {
+            this.number = number;
+            this.price = price;
+        }
+
+        public int getNumber() {
+            return number;
+        }
+
+        public int getPrice() {
+            return price;
+        }
+    }
 }
+
 
 
