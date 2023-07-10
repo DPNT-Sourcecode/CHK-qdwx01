@@ -2,6 +2,8 @@ package befaster.solutions.CHK;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class CheckoutSolution {
     public static final Map<Character, Integer> INDIVIDUAL_PRICES = new HashMap<>();
@@ -16,6 +18,14 @@ public class CheckoutSolution {
         if (skus == null) {
             return -1;
         }
+        String skusUpperCase = skus.toUpperCase();
+        Map<Character, Long> productCount = skusUpperCase.chars()
+                .mapToObj(c -> (char) c)
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+
+        productCount.keySet().forEach(System.out::println);
+
         return 0;
     }
 }
+
