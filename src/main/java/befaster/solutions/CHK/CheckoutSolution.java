@@ -17,6 +17,7 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('C', 20);
         INDIVIDUAL_PRICES.put('D', 15);
         INDIVIDUAL_PRICES.put('E', 40);
+        INDIVIDUAL_PRICES.put('F', 10);
     }
 
     private Integer calculateTotalPrice(char item, Long count, Integer individualPrice) {
@@ -51,12 +52,13 @@ public class CheckoutSolution {
     private Map<Character, Long> applyFreeItemsOffers(Map<Character, Long> productCount) {
         Map<Character, Long> productCountWithoutFreeItems = new HashMap<>(productCount);
 
-        long numberOfFreeBs = productCount.get('E') != null ? productCount.get('E') / 2 : 0;
-        long numberOfBs = productCount.get('B') != null ? productCount.get('B') : 0;
-
-        if (productCountWithoutFreeItems.containsKey('B')) {
+        if (productCount.get('B') != null && productCount.get('E') != null) {
+            long numberOfFreeBs = productCount.get('E') / 2;
+            long numberOfBs = productCount.get('B');
             productCountWithoutFreeItems.put('B', Math.max(0, numberOfBs - numberOfFreeBs));
         }
+
+//        long numberOfFreeFs = productCount.get('F') != null ? productCount.get('F') / 3 : 0;
 
         return productCountWithoutFreeItems;
     }
@@ -84,5 +86,6 @@ public class CheckoutSolution {
                 .sum();
     }
 }
+
 
 
