@@ -26,7 +26,7 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('H', 10);
         INDIVIDUAL_PRICES.put('I', 35);
         INDIVIDUAL_PRICES.put('J', 60);
-        INDIVIDUAL_PRICES.put('K', 80);
+        INDIVIDUAL_PRICES.put('K', 70);
         INDIVIDUAL_PRICES.put('L', 90);
         INDIVIDUAL_PRICES.put('M', 15);
         INDIVIDUAL_PRICES.put('N', 40);
@@ -34,14 +34,14 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('P', 50);
         INDIVIDUAL_PRICES.put('Q', 30);
         INDIVIDUAL_PRICES.put('R', 50);
-        INDIVIDUAL_PRICES.put('S', 30);
+        INDIVIDUAL_PRICES.put('S', 20);
         INDIVIDUAL_PRICES.put('T', 20);
         INDIVIDUAL_PRICES.put('U', 40);
         INDIVIDUAL_PRICES.put('V', 50);
         INDIVIDUAL_PRICES.put('W', 20);
-        INDIVIDUAL_PRICES.put('X', 90);
-        INDIVIDUAL_PRICES.put('Y', 10);
-        INDIVIDUAL_PRICES.put('Z', 50);
+        INDIVIDUAL_PRICES.put('X', 17);
+        INDIVIDUAL_PRICES.put('Y', 20);
+        INDIVIDUAL_PRICES.put('Z', 21);
     }
 
     private Integer calculateTotalPrice(char item, Long count, Integer individualPrice) {
@@ -151,4 +151,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
