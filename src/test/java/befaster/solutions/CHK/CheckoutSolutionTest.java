@@ -60,6 +60,13 @@ class CheckoutSolutionTest {
 
     @Test
     void shouldWorkWithOffersForE() {
+        int sum = checkoutSolution.checkout("AAABCDEEEE");
+
+        assertEquals(325, sum);
+    }
+
+    @Test
+    void shouldWorkWithOffersForEAndB() {
         int sum = checkoutSolution.checkout("AAABBCDEEEE");
 
         assertEquals(325, sum);
@@ -72,5 +79,6 @@ class CheckoutSolutionTest {
         assertEquals(-1, sum);
     }
 }
+
 
 
