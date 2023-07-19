@@ -120,7 +120,6 @@ public class CheckoutSolution {
      * @return
      */
     private Map<Character, Long> applyFreeItemsOffers(Map<Character, Long> productCount) {
-        Map<Character, Long> productCountWithoutFreeItems = new HashMap<>(productCount);
         Map<Character, Long> freeItems = new HashMap<>();
 
         freeItems.put('B', getNumberOfFreeItems('E', 'B', 2, productCount));
@@ -129,14 +128,14 @@ public class CheckoutSolution {
         freeItems.put('Q', getNumberOfFreeItems('R', 'Q', 3, productCount));
         freeItems.put('U', getNumberOfFreeItems('U', 'U', 3, productCount));
 
-        productCountWithoutFreeItems.keySet()
+        productCount.keySet()
                 .forEach(key -> {
                     if (freeItems.containsKey(key)) {
-                        productCountWithoutFreeItems.put(key, Math.max(productCountWithoutFreeItems.get(key) - freeItems.get(key), 0));
+                        productCount.put(key, Math.max(productCount.get(key) - freeItems.get(key), 0));
                     }
                 });
 
-        return productCountWithoutFreeItems;
+        return productCount;
     }
 
     /**
@@ -213,5 +212,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
