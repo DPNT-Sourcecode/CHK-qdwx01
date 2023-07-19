@@ -44,6 +44,14 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('Z', 21);
     }
 
+    /**
+     * Calculates total price for given item type. It invokes method to calculate any special offers.
+     *
+     * @param item item type as a char
+     * @param count number of items
+     * @param individualPrice individual price of the item
+     * @return total price given item and count.
+     */
     private Integer calculateTotalPrice(char item, Long count, Integer individualPrice) {
         switch (item) {
             case 'A':
@@ -65,6 +73,12 @@ public class CheckoutSolution {
         }
     }
 
+    /**
+     * It checks if skus is invalid.
+     *
+     * @param skus skus string
+     * @return true if invalid skus
+     */
     private boolean isInvalidSkus(String skus) {
         if (skus == null) {
             return true;
@@ -81,6 +95,14 @@ public class CheckoutSolution {
         return isInvalid;
     }
 
+    /**
+     *
+     * @param item
+     * @param freeItem
+     * @param number
+     * @param productCount
+     * @return
+     */
     private long getNumberOfFreeItems(char item, char freeItem, int number, Map<Character, Long> productCount) {
         if (productCount.get(item) == null || productCount.get(freeItem) == null) {
             return 0;
@@ -92,7 +114,11 @@ public class CheckoutSolution {
         }
     }
 
-
+    /**
+     *
+     * @param productCount
+     * @return
+     */
     private Map<Character, Long> applyFreeItemsOffers(Map<Character, Long> productCount) {
         Map<Character, Long> productCountWithoutFreeItems = new HashMap<>(productCount);
         Map<Character, Long> freeItems = new HashMap<>();
@@ -113,7 +139,11 @@ public class CheckoutSolution {
         return productCountWithoutFreeItems;
     }
 
-
+    /**
+     * 
+     * @param skus
+     * @return
+     */
     public Integer checkout(String skus) {
         if (isInvalidSkus(skus)) {
             return -1;
@@ -137,17 +167,51 @@ public class CheckoutSolution {
                 .sum();
     }
 
-    private record Offer(int number, int price) {
+    /**
+     * Record that describes and offer in form of: Buy {number} of items to get them for {value}.
+     * Example: 2B for 45
+     *
+     * @param number number of items in the offer
+     * @param value  total value of the offer
+     */
+    private record Offer(int number, int value) {
+        /**
+         * Calculate total offer value based on number of items and individual price.
+         *
+         * @param count           total number
+         * @param individualPrice individual price of the offer
+         * @return total offer value
+         */
         public int calculateOffer(long count, int individualPrice) {
-            return (int) (count / this.number * this.price + count % this.number * individualPrice);
+            return (int) (count / this.number * this.value + count % this.number * individualPrice);
         }
     }
 
-    private record DoubleOffer(int largeNumber, int largePrice, int smallNumber, int smallPrice) {
+    /**
+     * Record that describes a double offer in form of: Buy {largeNumber} of items to get them for {largeValue} or buy {smallNumber} of items to get them for {smallValue}.
+     * <p>
+     * These offers can be combined.
+     * <p>
+     * Example: 3A for 130, 5A for 200
+     *
+     * @param largeNumber large number of items in the offer
+     * @param majorValue major offer value for large number of items
+     * @param smallNumber small number of items in the offer
+     * @param minorValue minor offer value for small number of items
+     */
+    private record DoubleOffer(int largeNumber, int majorValue, int smallNumber, int minorValue) {
+        /**
+         * Calculate total offer value based on number of items and individual price.
+         *
+         * @param count           total number
+         * @param individualPrice individual price of the offer
+         * @return total offer value
+         */
         public int calculateOffer(long count, int individualPrice) {
-            return (int) (count / largeNumber * largePrice
-                    + count % largeNumber / smallNumber * smallPrice
+            return (int) (count / largeNumber * majorValue
+                    + count % largeNumber / smallNumber * minorValue
                     + (count % largeNumber) % smallNumber * individualPrice);
         }
     }
 }
+
