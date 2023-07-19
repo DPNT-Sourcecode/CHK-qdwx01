@@ -110,15 +110,16 @@ public class CheckoutSolution {
     }
 
     private Map<Character, Long> applyGroupItemOffers(long numberOfCombinations, Map<Character, Long> productCount) {
-        for (int i = 0; i < numberOfCombinations; i++) {
-            int j = 0;
-            while (j < GROUP_OFFER.length) {
-                Long count = productCount.get(GROUP_OFFER[j]);
-                if (productCount.containsKey(GROUP_OFFER[j]) && count > 0) {
-                    productCount.put(GROUP_OFFER[j], count - 1);
-                } else {
-                    j++;
-                }
+        int j = 0;
+        while (j < GROUP_OFFER.length) {
+            Long count = productCount.get(GROUP_OFFER[j]);
+            if (productCount.containsKey(GROUP_OFFER[j]) && count > 0) {
+                productCount.put(GROUP_OFFER[j], count - 1);
+            } else {
+                j++;
+            }
+            if (numberOfCombinations == j * 3) {
+                break;
             }
         }
         return productCount;
@@ -148,8 +149,6 @@ public class CheckoutSolution {
     }
 
     /**
-     *
-     *
      * @param productCount map with items and their respective count
      * @return product count map reduced by number of free items
      */
@@ -248,3 +247,4 @@ public class CheckoutSolution {
         }
     }
 }
+
