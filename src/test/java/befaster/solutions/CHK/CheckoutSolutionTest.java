@@ -122,6 +122,13 @@ class CheckoutSolutionTest {
     }
 
     @Test
+    void shouldWorkForCombinationsOfSZ() {
+        int sum = checkoutSolution.checkout("SSSZ");
+
+        assertEquals(65, sum);
+    }
+
+    @Test
     void shouldWorkForGroupOffers() {
         int sum = checkoutSolution.checkout("XYZXYZS");
 
