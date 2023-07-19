@@ -113,10 +113,8 @@ public class CheckoutSolution {
             int j = 0;
             while (j < GROUP_OFFER.length) {
                 Long count = productCount.get(GROUP_OFFER[j]);
-                if (count != null) {
-                    if (count > 0) {
-                        productCount.put(GROUP_OFFER[j], count - 1);
-                    }
+                if (productCount.containsKey(GROUP_OFFER[j]) && count > 0) {
+                    productCount.put(GROUP_OFFER[j], count - 1);
                 } else {
                     j++;
                 }
@@ -242,6 +240,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
