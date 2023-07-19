@@ -1,13 +1,12 @@
 package befaster.solutions.CHK;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class CheckoutSolution {
     public static final Map<Character, Integer> INDIVIDUAL_PRICES = new HashMap<>();
+    public static final Character[] GROUP_OFFER = {'S', 'T', 'X', 'Y', 'Z'};
     public static final DoubleOffer SPECIAL_OFFER_A = new DoubleOffer(5, 200, 3, 130);
     public static final Offer SPECIAL_OFFER_B = new Offer(2, 45);
     public static final DoubleOffer SPECIAL_OFFER_H = new DoubleOffer(10, 80, 5, 45);
@@ -96,26 +95,32 @@ public class CheckoutSolution {
         return isInvalid;
     }
 
-    private int getCombinations(Map<Character, Long> productCount) {
-        Map<Character, Long> consideredKeys = new HashMap<>(productCount);
-        char[] productCombination = {'S', 'T', 'X', 'Y', 'Z'};
-        long numberS = productCount.get('S');
-        long numberT = productCount.get('T');
-        long numberX = productCount.get('X');
-        long numberY = productCount.get('Y');
-        long numberZ = productCount.get('Z');
-        List<Long> list = List.of(numberS, numberT, numberX, numberY, numberZ);
-        long sum = list.stream().reduce(Long::sum).orElse(0L);
-        for (int i = 0; i < sum; i++) {
-            int currentCombination = 0;
-            for (int j = 0; j < productCombination.length; j++) {
-                if (productCount.get(productCombination[j]) == null) {
-
+    private Map<Character, Long> getCombinations(Map<Character, Long> productCount) {
+        long sum = Arrays.stream(GROUP_OFFER)
+                .mapToLong(key -> {
+                    if (productCount.containsKey(key)) {
+                        return productCount.get(key);
+                    }
+                    return 0L;
+                })
+                .reduce(Long::sum)
+                .orElse(0L);
+        long numberOfCombinations = sum / 3;
+        for (int i = 0; i < numberOfCombinations / 3; i++) {
+            int j = 0;
+            while (j < GROUP_OFFER.length) {
+                Long count = productCount.get(GROUP_OFFER[j]);
+                if (count != null) {
+                    if (count != 0) {
+                        productCount.put(GROUP_OFFER[j], count - 1);
+                    }
+                } else {
+                    j++;
                 }
             }
         }
+        return productCount;
     }
-
 
     /**
      * @param item         items that need to be bought to get a free item
@@ -231,3 +236,4 @@ public class CheckoutSolution {
         }
     }
 }
+
