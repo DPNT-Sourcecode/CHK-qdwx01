@@ -11,7 +11,7 @@ public class CheckoutSolution {
     public static final DoubleOffer SPECIAL_OFFER_A = new DoubleOffer(5, 200, 3, 130);
     public static final Offer SPECIAL_OFFER_B = new Offer(2, 45);
     public static final DoubleOffer SPECIAL_OFFER_H = new DoubleOffer(10, 80, 5, 45);
-    public static final Offer SPECIAL_OFFER_K = new Offer(2, 150);
+    public static final Offer SPECIAL_OFFER_K = new Offer(2, 120);
     public static final Offer SPECIAL_OFFER_P = new Offer(5, 200);
     public static final Offer SPECIAL_OFFER_Q = new Offer(3, 80);
     public static final DoubleOffer SPECIAL_OFFER_V = new DoubleOffer(3, 130, 2, 90);
@@ -258,5 +258,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
