@@ -1,6 +1,7 @@
 package befaster.solutions.CHK;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -47,8 +48,8 @@ public class CheckoutSolution {
     /**
      * Calculates total price for given item type. It invokes method to calculate any special offers.
      *
-     * @param item item type as a char
-     * @param count number of items
+     * @param item            item type as a char
+     * @param count           number of items
      * @param individualPrice individual price of the item
      * @return total price given item and count.
      */
@@ -96,14 +97,21 @@ public class CheckoutSolution {
     }
 
     private int getCombinations(Map<Character, Long> productCount) {
+        Map<Character, Long> consideredKeys = new HashMap<>(productCount);
+        char[] productCombination = {'S', 'T', 'X', 'Y', 'Z'};
+        long numberS = productCount.get('S');
+        long numberT = productCount.get('T');
+        long numberX = productCount.get('X');
+        long numberY = productCount.get('Y');
+        long numberZ = productCount.get('Z');
+        List<Long> list = List.of(numberS, numberT, numberX, numberY, numberZ);
         
     }
 
     /**
-     *
-     * @param item items that need to be bought to get a free item
-     * @param freeItem free item that is handed out when number of items is bought
-     * @param number number of items that needs to be bought to get free item
+     * @param item         items that need to be bought to get a free item
+     * @param freeItem     free item that is handed out when number of items is bought
+     * @param number       number of items that needs to be bought to get free item
      * @param productCount HashMap that includes all items in the checkout
      * @return number of free items
      */
@@ -119,7 +127,6 @@ public class CheckoutSolution {
     }
 
     /**
-     *
      * @param productCount
      * @return
      */
@@ -143,7 +150,6 @@ public class CheckoutSolution {
     }
 
     /**
-     *
      * @param skus
      * @return
      */
@@ -197,9 +203,9 @@ public class CheckoutSolution {
      * Example: 3A for 130, 5A for 200
      *
      * @param largeNumber large number of items in the offer
-     * @param majorValue major offer value for large number of items
+     * @param majorValue  major offer value for large number of items
      * @param smallNumber small number of items in the offer
-     * @param minorValue minor offer value for small number of items
+     * @param minorValue  minor offer value for small number of items
      */
     private record DoubleOffer(int largeNumber, int majorValue, int smallNumber, int minorValue) {
         /**
@@ -216,3 +222,4 @@ public class CheckoutSolution {
         }
     }
 }
+
