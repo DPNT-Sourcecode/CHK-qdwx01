@@ -77,7 +77,7 @@ public class CheckoutSolution {
     /**
      * It checks if skus is invalid.
      *
-     * @param skus skus string
+     * @param skus a String containing the SKUs of all the products in the basket
      * @return true if invalid skus
      */
     private boolean isInvalidSkus(String skus) {
@@ -125,6 +125,11 @@ public class CheckoutSolution {
     }
 
     /**
+     * Calculates number of freeItems when a number of items is bought.
+     * Works in cases when:
+     * 2E get one B free, where E is the item, B is free item and 2 is the number
+     * 3U get one U free, where U is both item and free item and 3 is the number
+     *
      * @param item         items that need to be bought to get a free item
      * @param freeItem     free item that is handed out when number of items is bought
      * @param number       number of items that needs to be bought to get free item
@@ -143,8 +148,10 @@ public class CheckoutSolution {
     }
 
     /**
-     * @param productCount
-     * @return
+     *
+     *
+     * @param productCount map with items and their respective count
+     * @return product count map reduced by number of free items
      */
     private Map<Character, Long> applyFreeItemsOffers(Map<Character, Long> productCount) {
         Map<Character, Long> freeItems = new HashMap<>();
@@ -166,8 +173,8 @@ public class CheckoutSolution {
     }
 
     /**
-     * @param skus
-     * @return
+     * @param skus a String containing the SKUs of all the products in the basket
+     * @return an Integer representing the total checkout value of the items
      */
     public Integer checkout(String skus) {
         if (isInvalidSkus(skus)) {
@@ -241,7 +248,3 @@ public class CheckoutSolution {
         }
     }
 }
-
-
-
-
