@@ -108,6 +108,13 @@ class CheckoutSolutionTest {
     }
 
     @Test
+    void shouldWorkForWholeAlphabetRange() {
+        int sum = checkoutSolution.checkout("FFABCDECBAABCABBAAAEEAAFFKMNOPRRQXZ");
+
+        assertEquals(988, sum);
+    }
+
+    @Test
     void shouldWorkForCombinationsOfSTXYZ() {
     }
 }
