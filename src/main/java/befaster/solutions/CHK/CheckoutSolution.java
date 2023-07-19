@@ -96,6 +96,12 @@ public class CheckoutSolution {
         return isInvalid;
     }
 
+    /**
+     * Gets number of group offer availables
+     *
+     * @param productCount
+     * @return
+     */
     private int getNumberOfGroupOffers(Map<Character, Long> productCount) {
         long sum = Arrays.stream(GROUP_OFFER)
                 .mapToLong(key -> {
@@ -149,6 +155,8 @@ public class CheckoutSolution {
     }
 
     /**
+     * Updates product count by reducing it by number of free items.
+     *
      * @param productCount map with items and their respective count
      * @return product count map reduced by number of free items
      */
@@ -172,6 +180,8 @@ public class CheckoutSolution {
     }
 
     /**
+     * Checkout method that calculates total price.
+     *
      * @param skus a String containing the SKUs of all the products in the basket
      * @return an Integer representing the total checkout value of the items
      */
@@ -247,4 +257,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
