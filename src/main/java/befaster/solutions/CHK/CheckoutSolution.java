@@ -97,8 +97,8 @@ public class CheckoutSolution {
 
     /**
      *
-     * @param item item that needs to be bought to get a free item
-     * @param freeItem free item that is handed out when item is bought
+     * @param item items that need to be bought to get a free item
+     * @param freeItem free item that is handed out when number of items is bought
      * @param number number of items that needs to be bought to get free item
      * @param productCount HashMap that includes all items in the checkout
      * @return number of free items
@@ -213,4 +213,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
