@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 public class CheckoutSolution {
     public static final Map<Character, Integer> INDIVIDUAL_PRICES = new HashMap<>();
     public static final Character[] GROUP_OFFER = {'S', 'T', 'X', 'Y', 'Z'};
+    public static final int GROUP_OFFER_VALUE = 45;
     public static final DoubleOffer SPECIAL_OFFER_A = new DoubleOffer(5, 200, 3, 130);
     public static final Offer SPECIAL_OFFER_B = new Offer(2, 45);
     public static final DoubleOffer SPECIAL_OFFER_H = new DoubleOffer(10, 80, 5, 45);
@@ -95,7 +96,7 @@ public class CheckoutSolution {
         return isInvalid;
     }
 
-    private long getNumberOfGroupOffers(Map<Character, Long> productCount) {
+    private int getNumberOfGroupOffers(Map<Character, Long> productCount) {
         long sum = Arrays.stream(GROUP_OFFER)
                 .mapToLong(key -> {
                     if (productCount.containsKey(key)) {
@@ -105,7 +106,7 @@ public class CheckoutSolution {
                 })
                 .reduce(Long::sum)
                 .orElse(0L);
-        return sum / 3;
+        return (int) (sum / 3);
     }
 
     private Map<Character, Long> applyGroupItemOffers(long numberOfCombinations, Map<Character, Long> productCount) {
@@ -178,7 +179,7 @@ public class CheckoutSolution {
 
         Map<Character, Long> productCountWithoutFreeItems = applyFreeItemsOffers(productCount);
 
-        long numberOfGroupOffers = getNumberOfGroupOffers(productCountWithoutFreeItems);
+        int numberOfGroupOffers = getNumberOfGroupOffers(productCountWithoutFreeItems);
         Map<Character, Long> updatedProductCount = applyGroupItemOffers(numberOfGroupOffers, productCount);
 
         return updatedProductCount.keySet().stream()
@@ -190,7 +191,7 @@ public class CheckoutSolution {
                     }
                     return price;
                 })
-                .sum();
+                .sum() + GROUP_OFFER_VALUE * numberOfGroupOffers;
     }
 
     /**

@@ -116,8 +116,8 @@ class CheckoutSolutionTest {
 
     @Test
     void shouldWorkForCombinationsOfXYZ() {
-        int sum = checkoutSolution.checkout("XYZ");
+        int sum = checkoutSolution.checkout("XYZXYZ");
 
-        assertEquals(45, sum);
+        assertEquals(90, sum);
     }
 }
