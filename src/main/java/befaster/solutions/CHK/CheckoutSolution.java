@@ -106,7 +106,7 @@ public class CheckoutSolution {
                 .reduce(Long::sum)
                 .orElse(0L);
         long numberOfCombinations = sum / 3;
-        for (int i = 0; i < numberOfCombinations / 3; i++) {
+        for (int i = 0; i < numberOfCombinations; i++) {
             int j = 0;
             while (j < GROUP_OFFER.length) {
                 Long count = productCount.get(GROUP_OFFER[j]);
@@ -236,4 +236,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
