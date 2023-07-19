@@ -123,7 +123,7 @@ public class CheckoutSolution {
     private void applyGroupItemOffers(long numberOfCombinations, Map<Character, Long> productCount) {
         int i = 0;
         int j = 0;
-        while (j < GROUP_OFFER.length && i <= numberOfCombinations * 3 && numberOfCombinations != 0) {
+        while (j < GROUP_OFFER.length && i < numberOfCombinations * 3) {
             Long count = productCount.get(GROUP_OFFER[j]);
             if (productCount.containsKey(GROUP_OFFER[j]) && count > 0) {
                 productCount.put(GROUP_OFFER[j], count - 1);
