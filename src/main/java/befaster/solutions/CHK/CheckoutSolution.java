@@ -116,22 +116,22 @@ public class CheckoutSolution {
     }
 
     /**
-     *
-     *
+     * Applies group
      * @param numberOfCombinations number of group offers available
      * @param productCount number of group offers available
      */
     private void applyGroupItemOffers(long numberOfCombinations, Map<Character, Long> productCount) {
         int j = 0;
-        while (j < GROUP_OFFER.length) {
+        int currentCombination = 1;
+        while (j < GROUP_OFFER.length && currentCombination <= numberOfCombinations) {
             Long count = productCount.get(GROUP_OFFER[j]);
             if (productCount.containsKey(GROUP_OFFER[j]) && count > 0) {
                 productCount.put(GROUP_OFFER[j], count - 1);
             } else {
                 j++;
             }
-            if (numberOfCombinations == j * 3) {
-                break;
+            if (j % 3 == 0) {
+                currentCombination++;
             }
         }
     }
@@ -259,6 +259,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
