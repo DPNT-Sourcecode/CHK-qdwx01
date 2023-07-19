@@ -105,8 +105,17 @@ public class CheckoutSolution {
         long numberY = productCount.get('Y');
         long numberZ = productCount.get('Z');
         List<Long> list = List.of(numberS, numberT, numberX, numberY, numberZ);
-        
+        long sum = list.stream().reduce(Long::sum).orElse(0L);
+        for (int i = 0; i < sum; i++) {
+            int currentCombination = 0;
+            for (int j = 0; j < productCombination.length; j++) {
+                if (productCount.get(productCombination[j]) == null) {
+
+                }
+            }
+        }
     }
+
 
     /**
      * @param item         items that need to be bought to get a free item
@@ -222,4 +231,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
