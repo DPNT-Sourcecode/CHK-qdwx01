@@ -95,7 +95,7 @@ public class CheckoutSolution {
         return isInvalid;
     }
 
-    private Map<Character, Long> getCombinations(Map<Character, Long> productCount) {
+    private long getNumberOfGroupOffers(Map<Character, Long> productCount) {
         long sum = Arrays.stream(GROUP_OFFER)
                 .mapToLong(key -> {
                     if (productCount.containsKey(key)) {
@@ -105,13 +105,16 @@ public class CheckoutSolution {
                 })
                 .reduce(Long::sum)
                 .orElse(0L);
-        long numberOfCombinations = sum / 3;
+        return sum / 3;
+    }
+
+    private Map<Character, Long> applyGroupItemOffers(long numberOfCombinations, Map<Character, Long> productCount) {
         for (int i = 0; i < numberOfCombinations; i++) {
             int j = 0;
             while (j < GROUP_OFFER.length) {
                 Long count = productCount.get(GROUP_OFFER[j]);
                 if (count != null) {
-                    if (count != 0) {
+                    if (count > 0) {
                         productCount.put(GROUP_OFFER[j], count - 1);
                     }
                 } else {
@@ -177,7 +180,10 @@ public class CheckoutSolution {
 
         Map<Character, Long> productCountWithoutFreeItems = applyFreeItemsOffers(productCount);
 
-        return productCountWithoutFreeItems.keySet().stream()
+        long numberOfGroupOffers = getNumberOfGroupOffers(productCountWithoutFreeItems);
+        Map<Character, Long> updatedProductCount = applyGroupItemOffers(numberOfGroupOffers, productCount);
+
+        return updatedProductCount.keySet().stream()
                 .mapToInt(key -> {
                     Integer individualPrice = INDIVIDUAL_PRICES.get(key);
                     int price = 0;
@@ -236,5 +242,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
