@@ -127,7 +127,7 @@ public class CheckoutSolution {
             Long count = productCount.get(GROUP_OFFER[j]);
             if (productCount.containsKey(GROUP_OFFER[j]) && count > 0) {
                 productCount.put(GROUP_OFFER[j], count - 1);
-                if (j % 3 == 0 && j > 0) {
+                if (j % 3 * currentCombination == 0 && j > 0) {
                     currentCombination++;
                 }
             } else {
@@ -259,9 +259,3 @@ public class CheckoutSolution {
         }
     }
 }
-
-
-
-
-
-

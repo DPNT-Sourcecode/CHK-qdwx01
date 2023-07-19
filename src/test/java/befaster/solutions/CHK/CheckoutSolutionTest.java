@@ -128,4 +128,3 @@ class CheckoutSolutionTest {
         assertEquals(999, sum);
     }
 }
-
