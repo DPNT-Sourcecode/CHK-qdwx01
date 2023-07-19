@@ -43,8 +43,6 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('X', 17);
         INDIVIDUAL_PRICES.put('Y', 20);
         INDIVIDUAL_PRICES.put('Z', 21);
-
-        Arrays.stream()
     }
 
     /**
@@ -260,6 +258,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
