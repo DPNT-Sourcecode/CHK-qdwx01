@@ -198,7 +198,7 @@ public class CheckoutSolution {
         int numberOfGroupOffers = getNumberOfGroupOffers(productCountWithoutFreeItems);
         Map<Character, Long> updatedProductCount = applyGroupItemOffers(numberOfGroupOffers, productCount);
 
-        return updatedProductCount.keySet().stream()
+        return productCountWithoutFreeItems.keySet().stream()
                 .mapToInt(key -> {
                     Integer individualPrice = INDIVIDUAL_PRICES.get(key);
                     int price = 0;
@@ -257,5 +257,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 

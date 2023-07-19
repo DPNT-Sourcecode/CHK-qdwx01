@@ -123,8 +123,9 @@ class CheckoutSolutionTest {
 
     @Test
     void shouldWorkForGroupOffers() {
-        int sum = checkoutSolution.checkout("STTXYZXYZ");
+        int sum = checkoutSolution.checkout("XYZXYZS");
 
         assertEquals(90, sum);
     }
 }
+
