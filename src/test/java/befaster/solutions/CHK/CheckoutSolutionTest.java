@@ -125,7 +125,7 @@ class CheckoutSolutionTest {
     void shouldWorkForGroupOffers() {
         int sum = checkoutSolution.checkout("XYZXYZS");
 
-        assertEquals(90, sum);
+        assertEquals(999, sum);
     }
 }
 

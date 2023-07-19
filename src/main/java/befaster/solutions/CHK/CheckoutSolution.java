@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class CheckoutSolution {
     public static final Map<Character, Integer> INDIVIDUAL_PRICES = new HashMap<>();
-    public static final Character[] GROUP_OFFER = {'S', 'T', 'X', 'Y', 'Z'};
+    public static final Character[] GROUP_OFFER = {'X', 'S', 'T', 'Y', 'Z'};
     public static final int GROUP_OFFER_VALUE = 45;
     public static final DoubleOffer SPECIAL_OFFER_A = new DoubleOffer(5, 200, 3, 130);
     public static final Offer SPECIAL_OFFER_B = new Offer(2, 45);
@@ -97,10 +97,10 @@ public class CheckoutSolution {
     }
 
     /**
-     * Gets number of group offer availables
+     * Gets number of group offer available in the checkout
      *
-     * @param productCount
-     * @return
+     * @param productCount map that includes all items in the checkout
+     * @return number of group offers available
      */
     private int getNumberOfGroupOffers(Map<Character, Long> productCount) {
         long sum = Arrays.stream(GROUP_OFFER)
@@ -115,7 +115,13 @@ public class CheckoutSolution {
         return (int) (sum / 3);
     }
 
-    private Map<Character, Long> applyGroupItemOffers(long numberOfCombinations, Map<Character, Long> productCount) {
+    /**
+     *
+     *
+     * @param numberOfCombinations number of group offers available
+     * @param productCount number of group offers available
+     */
+    private void applyGroupItemOffers(long numberOfCombinations, Map<Character, Long> productCount) {
         int j = 0;
         while (j < GROUP_OFFER.length) {
             Long count = productCount.get(GROUP_OFFER[j]);
@@ -128,7 +134,6 @@ public class CheckoutSolution {
                 break;
             }
         }
-        return productCount;
     }
 
     /**
@@ -140,7 +145,7 @@ public class CheckoutSolution {
      * @param item         items that need to be bought to get a free item
      * @param freeItem     free item that is handed out when number of items is bought
      * @param number       number of items that needs to be bought to get free item
-     * @param productCount HashMap that includes all items in the checkout
+     * @param productCount map that includes all items in the checkout
      * @return number of free items
      */
     private long getNumberOfFreeItems(char item, char freeItem, int number, Map<Character, Long> productCount) {
@@ -158,9 +163,8 @@ public class CheckoutSolution {
      * Updates product count by reducing it by number of free items.
      *
      * @param productCount map with items and their respective count
-     * @return product count map reduced by number of free items
      */
-    private Map<Character, Long> applyFreeItemsOffers(Map<Character, Long> productCount) {
+    private void applyFreeItemsOffers(Map<Character, Long> productCount) {
         Map<Character, Long> freeItems = new HashMap<>();
 
         freeItems.put('B', getNumberOfFreeItems('E', 'B', 2, productCount));
@@ -175,8 +179,6 @@ public class CheckoutSolution {
                         productCount.put(key, Math.max(productCount.get(key) - freeItems.get(key), 0));
                     }
                 });
-
-        return productCount;
     }
 
     /**
@@ -193,17 +195,17 @@ public class CheckoutSolution {
                 .mapToObj(c -> (char) c)
                 .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
 
-        Map<Character, Long> productCountWithoutFreeItems = applyFreeItemsOffers(productCount);
+        applyFreeItemsOffers(productCount);
 
-        int numberOfGroupOffers = getNumberOfGroupOffers(productCountWithoutFreeItems);
-        Map<Character, Long> updatedProductCount = applyGroupItemOffers(numberOfGroupOffers, productCount);
+        int numberOfGroupOffers = getNumberOfGroupOffers(productCount);
+        applyGroupItemOffers(numberOfGroupOffers, productCount);
 
-        return updatedProductCount.keySet().stream()
+        return productCount.keySet().stream()
                 .mapToInt(key -> {
                     Integer individualPrice = INDIVIDUAL_PRICES.get(key);
                     int price = 0;
                     if (individualPrice != null) {
-                        price = calculateTotalPrice(key, productCountWithoutFreeItems.get(key), individualPrice);
+                        price = calculateTotalPrice(key, productCount.get(key), individualPrice);
                     }
                     return price;
                 })
