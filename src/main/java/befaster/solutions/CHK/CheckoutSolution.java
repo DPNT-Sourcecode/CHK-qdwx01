@@ -116,7 +116,8 @@ public class CheckoutSolution {
     }
 
     /**
-     * Applies group
+     * Applies group offers to the product count map.
+     *
      * @param numberOfCombinations number of group offers available
      * @param productCount number of group offers available
      */
@@ -257,4 +258,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
