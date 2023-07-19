@@ -97,11 +97,11 @@ public class CheckoutSolution {
 
     /**
      *
-     * @param item
-     * @param freeItem
-     * @param number
-     * @param productCount
-     * @return
+     * @param item item that needs to be bought to get a free item
+     * @param freeItem free item that is handed out when item is bought
+     * @param number number of items that needs to be bought to get free item
+     * @param productCount HashMap that includes all items in the checkout
+     * @return number of free items
      */
     private long getNumberOfFreeItems(char item, char freeItem, int number, Map<Character, Long> productCount) {
         if (productCount.get(item) == null || productCount.get(freeItem) == null) {
@@ -213,3 +213,4 @@ public class CheckoutSolution {
         }
     }
 }
+
