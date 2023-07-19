@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class CheckoutSolution {
     public static final Map<Character, Integer> INDIVIDUAL_PRICES = new HashMap<>();
-    public static final Character[] GROUP_OFFER = {'X', 'S', 'T', 'Y', 'Z'};
+    public static final Character[] GROUP_OFFER = {'Z', 'S', 'T', 'Y', 'X'};
     public static final int GROUP_OFFER_VALUE = 45;
     public static final DoubleOffer SPECIAL_OFFER_A = new DoubleOffer(5, 200, 3, 130);
     public static final Offer SPECIAL_OFFER_B = new Offer(2, 45);
@@ -43,6 +43,8 @@ public class CheckoutSolution {
         INDIVIDUAL_PRICES.put('X', 17);
         INDIVIDUAL_PRICES.put('Y', 20);
         INDIVIDUAL_PRICES.put('Z', 21);
+
+        Arrays.stream()
     }
 
     /**
@@ -258,6 +260,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
