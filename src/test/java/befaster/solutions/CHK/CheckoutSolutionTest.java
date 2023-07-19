@@ -106,4 +106,8 @@ class CheckoutSolutionTest {
 
         assertEquals(695, sum);
     }
+
+    @Test
+    void shouldWorkForCombinationsOfSTXYZ() {
+    }
 }
