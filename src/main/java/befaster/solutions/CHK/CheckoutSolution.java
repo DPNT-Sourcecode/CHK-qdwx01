@@ -158,11 +158,10 @@ public class CheckoutSolution {
                 .mapToInt(key -> {
                     Integer individualPrice = INDIVIDUAL_PRICES.get(key);
                     int price = 0;
-                    int mixMatchDiscount = 0;
                     if (individualPrice != null) {
                         price = calculateTotalPrice(key, productCountWithoutFreeItems.get(key), individualPrice);
                     }
-                    return price - mixMatchDiscount;
+                    return price;
                 })
                 .sum();
     }
@@ -214,5 +213,6 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
