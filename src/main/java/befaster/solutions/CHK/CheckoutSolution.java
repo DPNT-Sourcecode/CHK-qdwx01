@@ -95,6 +95,10 @@ public class CheckoutSolution {
         return isInvalid;
     }
 
+    private int getCombinations(Map<Character, Long> productCount) {
+        
+    }
+
     /**
      *
      * @param item items that need to be bought to get a free item
@@ -212,6 +216,7 @@ public class CheckoutSolution {
         }
     }
 }
+
 
 
 
