@@ -140,7 +140,7 @@ public class CheckoutSolution {
     }
 
     /**
-     * 
+     *
      * @param skus
      * @return
      */
@@ -214,4 +214,5 @@ public class CheckoutSolution {
         }
     }
 }
+
 
